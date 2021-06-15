@@ -1,0 +1,31 @@
+.header,
+.main {
+  width: 90%;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.inputSearch {
+  border: medium solid #01b4c6;
+  padding: 0.5rem 1rem;
+}
+
+.CharacterList {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.CharacterCard {
+  background-color: #01b4c6;
+  width: 10rem;
+}
+
+.CharacterCard img {
+  width: 100%;
+}
+
+.characterInfo {
+  padding: 0.6rem;
+}
