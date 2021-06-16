@@ -8,12 +8,16 @@ function FilterBySpecies(props) {
   };
 
   return (
-    <select name="species" id="species" onChange={handleChange}>
-      <option value="all">Todos</option>
-      <option value="human">Humano</option>
-      <option value="humanoid">Humanoide</option>
-      <option value="alien">Alien</option>
-      <option value="cronenberg">Cronenberg</option>
+    <select
+      className="inputSelect"
+      name="species"
+      id="species"
+      onChange={handleChange}>
+      <option value="All">Todos</option>
+      <option value="Human">Humano</option>
+      <option value="Humanoid">Humanoide</option>
+      <option value="Alien">Alien</option>
+      <option value="Cronenberg">Cronenberg</option>
     </select>
   );
 }

@@ -5,9 +5,11 @@
   padding: 1rem 0;
 }
 
-.inputSearch {
+.inputSearch,
+.inputSelect {
   border: medium solid #01b4c6;
   padding: 0.5rem 1rem;
+  margin: 1rem;
 }
 
 .CharacterList {

@@ -12,13 +12,12 @@ import ls from "../services/localStorage";
 //aunque funcionaría tanto si está fuera como si está dentro
 //el array vacío significa que if characters is undefined, ponme []
 const charactersLocalStorageData = ls.get("characters", []);
-console.log(charactersLocalStorageData);
 
 function App() {
   const [characters, setCharacters] = useState(charactersLocalStorageData);
   const [filterName, setFilterName] = useState(ls.get("filterName", ""));
   const [filterSpecies, setFilterSpecies] = useState(
-    ls.get("filterSpecies", "")
+    ls.get("filterSpecies", "All")
   );
 
   useEffect(
@@ -37,6 +36,7 @@ function App() {
     [] /* cuándo ejecutar useEffect */
   );
 
+  //guardamos en localStorage
   useEffect(() => {
     ls.set("characters", characters);
     ls.set("filterName", filterName);
@@ -46,7 +46,6 @@ function App() {
   //EV HANDLER
 
   const handleFilter = (data) => {
-    console.log(data);
     if (data.key === "name") {
       setFilterName(data.value);
     } else if (data.key === "species") {
@@ -56,10 +55,23 @@ function App() {
 
   //RENDER
   //filtramos por personaje y comprobamos si incluyen el filterName
-  const filteredCharacters = characters.filter((eachCharacter) => {
-    return eachCharacter.name.toLowerCase().includes(filterName.toLowerCase());
-  });
+  const filteredCharacters = characters
+    .filter((eachCharacter) => {
+      return eachCharacter.name
+        .toLowerCase()
+        .includes(filterName.toLowerCase());
+    })
+    .filter((eachCharacter) => {
+      console.log(filterSpecies);
+      if (filterSpecies === "All") {
+        return true;
+      } else {
+        return eachCharacter.species === filterSpecies;
+      }
+    });
+
   console.log("State filter Characters", filteredCharacters);
+  console.log("State filter Characters", filterSpecies);
 
   return (
     <>

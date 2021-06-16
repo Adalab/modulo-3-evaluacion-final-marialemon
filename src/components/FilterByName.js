@@ -4,7 +4,6 @@ function FilterByName(props) {
       value: ev.target.value,
       key: "name",
     });
-    console.log(props.handleFilter);
   };
 
   return (
