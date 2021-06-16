@@ -13,8 +13,11 @@ function getApiData() {
           img: eachCharacter.image,
           species: eachCharacter.species,
           status: eachCharacter.status,
+          origin: eachCharacter.origin,
+          episode: eachCharacter.episode,
         };
       });
+
       return filteredData;
     });
 }

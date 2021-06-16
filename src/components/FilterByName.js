@@ -12,6 +12,7 @@ function FilterByName(props) {
       type="text"
       name="name"
       id="name"
+      value={props.filterName}
       onChange={handleChange}
     />
   );

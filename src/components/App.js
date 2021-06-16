@@ -1,4 +1,4 @@
-import { Link, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "../stylesheets/App.css";
 import getApiData from "../services/api";
@@ -39,9 +39,15 @@ function App() {
   //guardamos en localStorage
   useEffect(() => {
     ls.set("characters", characters);
+  }, [characters]);
+
+  useEffect(() => {
     ls.set("filterName", filterName);
+  }, [filterName]);
+
+  useEffect(() => {
     ls.set("filterSpecies", filterSpecies);
-  }, [characters, filterName, filterSpecies]);
+  }, [filterSpecies]);
 
   //EV HANDLER
 
@@ -62,7 +68,6 @@ function App() {
         .includes(filterName.toLowerCase());
     })
     .filter((eachCharacter) => {
-      console.log(filterSpecies);
       if (filterSpecies === "All") {
         return true;
       } else {
@@ -70,23 +75,37 @@ function App() {
       }
     });
 
-  console.log("State filter Characters", filteredCharacters);
-  console.log("State filter Characters", filterSpecies);
+  const renderCharacterDetail = (props) => {
+    const routeCharacterId = props.match.params.id;
+    const foundCharacter = characters.find((eachCharacter) => {
+      //búscame el id que sea igual al routeCharacterId
+      //pasamos a entero el routeCharacterId porque era un string
+      return eachCharacter.id === parseInt(routeCharacterId);
+    });
+
+    return <CharacterDetail character={foundCharacter} />;
+  };
 
   return (
     <>
       <header className="header">
-        <Link to="/">
-          <h1>Rick and Morty</h1>
-          <img
-            src="../../public/Rick_and_Morty_logo.png"
-            alt="Rick and Morty logotipo"
-          />
-        </Link>
-        <Filters handleFilter={handleFilter} />
+        <h1>Rick and Morty</h1>
+        <img
+          src="../../public/Rick_and_Morty_logo.png"
+          alt="Rick and Morty logotipo"
+        />
+
+        <Filters
+          filterName={filterName}
+          filterSpecies={filterSpecies}
+          handleFilter={handleFilter}
+        />
       </header>
       <main className="main">
         <CharacterList characters={filteredCharacters} />
+        <Switch>
+          <Route path="/character/:id" render={renderCharacterDetail} />
+        </Switch>
       </main>
     </>
   );

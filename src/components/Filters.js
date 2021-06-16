@@ -4,8 +4,14 @@ import FilterBySpecies from "./FilterBySpecies";
 function Filters(props) {
   return (
     <form className="Filters">
-      <FilterByName handleFilter={props.handleFilter} />
-      <FilterBySpecies handleFilter={props.handleFilter} />
+      <FilterByName
+        filterName={props.filterName}
+        handleFilter={props.handleFilter}
+      />
+      <FilterBySpecies
+        filterSpecies={props.filterSpecies}
+        handleFilter={props.handleFilter}
+      />
     </form>
   );
 }

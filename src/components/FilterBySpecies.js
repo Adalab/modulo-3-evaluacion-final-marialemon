@@ -4,7 +4,6 @@ function FilterBySpecies(props) {
       value: ev.target.value,
       key: "species",
     });
-    console.log(props.handleFilter);
   };
 
   return (
@@ -12,6 +11,7 @@ function FilterBySpecies(props) {
       className="inputSelect"
       name="species"
       id="species"
+      value={props.filterSpecies}
       onChange={handleChange}>
       <option value="All">Todos</option>
       <option value="Human">Humano</option>

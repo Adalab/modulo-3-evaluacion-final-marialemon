@@ -3,7 +3,9 @@ import CharacterCard from "./CharacterCard";
 function CharacterList(props) {
   const characterCard = props.characters.map((eachCharacter) => {
     return (
-      <CharacterCard key={eachCharacter.id} eachCharacter={eachCharacter} />
+      <li key={eachCharacter.id}>
+        <CharacterCard eachCharacter={eachCharacter} />
+      </li>
     );
   });
 
