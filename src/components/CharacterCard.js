@@ -1,7 +1,11 @@
 function CharacterCard(props) {
   return (
     <li className="CharacterCard">
-      <img src={props.eachCharacter.img} title={props.eachCharacter.name} />
+      <img
+        src={props.eachCharacter.img}
+        title={props.eachCharacter.name}
+        alt={props.eachCharacter.name}
+      />
       <div className="characterInfo">
         <h3>{props.eachCharacter.name}</h3>
         <p>{props.eachCharacter.species}</p>
