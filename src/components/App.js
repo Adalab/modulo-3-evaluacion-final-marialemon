@@ -16,6 +16,10 @@ console.log(charactersLocalStorageData);
 
 function App() {
   const [characters, setCharacters] = useState(charactersLocalStorageData);
+  const [filterName, setFilterName] = useState(ls.get("filterName", ""));
+  const [filterSpecies, setFilterSpecies] = useState(
+    ls.get("filterSpecies", "")
+  );
 
   useEffect(
     () => {
@@ -29,17 +33,33 @@ function App() {
           setCharacters(charactersData);
         });
       }
-
-      //  return () => {
-      //desmontaje
-      //  };
     },
     [] /* cuándo ejecutar useEffect */
   );
 
   useEffect(() => {
     ls.set("characters", characters);
-  }, [characters]);
+    ls.set("filterName", filterName);
+    ls.set("filterSpecies", filterSpecies);
+  }, [characters, filterName, filterSpecies]);
+
+  //EV HANDLER
+
+  const handleFilter = (data) => {
+    console.log(data);
+    if (data.key === "name") {
+      setFilterName(data.value);
+    } else if (data.key === "species") {
+      setFilterSpecies(data.value);
+    }
+  };
+
+  //RENDER
+  //filtramos por personaje y comprobamos si incluyen el filterName
+  const filteredCharacters = characters.filter((eachCharacter) => {
+    return eachCharacter.name.toLowerCase().includes(filterName.toLowerCase());
+  });
+  console.log("State filter Characters", filteredCharacters);
 
   return (
     <>
@@ -51,11 +71,10 @@ function App() {
             alt="Rick and Morty logotipo"
           />
         </Link>
-        <Filters />
+        <Filters handleFilter={handleFilter} />
       </header>
       <main className="main">
-        <CharacterList characters={characters} />
-        <CharacterDetail />
+        <CharacterList characters={filteredCharacters} />
       </main>
     </>
   );

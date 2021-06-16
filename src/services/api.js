@@ -1,7 +1,7 @@
 function getApiData() {
   //añadimos return porque la función getApiData tiene que retornar algo
   //sino saldría undefined
-  return fetch("https://rickandmortyapi.com/api/character/?name=rick")
+  return fetch(`https://rickandmortyapi.com/api/character`)
     .then((res) => res.json())
     .then((data) => {
       //filtramos los datos que nos interesan con un map

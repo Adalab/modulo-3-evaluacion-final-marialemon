@@ -1,7 +1,11 @@
-function Filters() {
+import FilterByName from "./FilterByName";
+import FilterBySpecies from "./FilterBySpecies";
+
+function Filters(props) {
   return (
     <form className="Filters">
-      <input className="inputSearch" type="search" />
+      <FilterByName handleFilter={props.handleFilter} />
+      <FilterBySpecies handleFilter={props.handleFilter} />
     </form>
   );
 }
