@@ -6,6 +6,7 @@ import Filters from "./Filters";
 import CharacterList from "./CharacterList";
 import CharacterDetail from "./CharacterDetail";
 import ls from "../services/localStorage";
+import logo from "../images/Rick_and_Morty_logo.png";
 
 //podemos crear una const para pedir el localStorage fuera del componente
 //porque solo queremos que se ejecute una vez, no cada vez que se renderice
@@ -83,18 +84,17 @@ function App() {
       return eachCharacter.id === parseInt(routeCharacterId);
     });
 
-    return <CharacterDetail character={foundCharacter} />;
+    if (foundCharacter !== undefined) {
+      return <CharacterDetail character={foundCharacter} />;
+    } else {
+      return <p className="notFoundMessage">Personaje no encontrado</p>;
+    }
   };
 
   return (
     <>
       <header className="header">
-        <h1>Rick and Morty</h1>
-        <img
-          src="../../public/Rick_and_Morty_logo.png"
-          alt="Rick and Morty logotipo"
-        />
-
+        <img src={logo} alt="Rick and Morty logotipo" title="Rick and Morty" />
         <Filters
           filterName={filterName}
           filterSpecies={filterSpecies}
@@ -102,7 +102,10 @@ function App() {
         />
       </header>
       <main className="main">
-        <CharacterList characters={filteredCharacters} />
+        <CharacterList
+          filterName={filterName}
+          characters={filteredCharacters}
+        />
         <Switch>
           <Route path="/character/:id" render={renderCharacterDetail} />
         </Switch>

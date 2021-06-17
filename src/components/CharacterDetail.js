@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 function CharacterDetail(props) {
   return (
@@ -16,7 +17,7 @@ function CharacterDetail(props) {
               <li>Status: {props.character.status}</li>
               <li>Especie: {props.character.species}</li>
               <li>Origen: {props.character.origin.name}</li>
-              <li>Episodios: {props.character.episode.length}</li>
+              <li>Aparece en: {props.character.episode.length} episodios</li>
             </ul>
           </div>
         </article>
@@ -24,5 +25,15 @@ function CharacterDetail(props) {
     </Link>
   );
 }
+
+CharacterDetail.propTypes = {
+  character: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    species: PropTypes.string,
+    photo: PropTypes.string,
+    status: PropTypes.string,
+  }),
+};
 
 export default CharacterDetail;

@@ -1,22 +1,43 @@
-.header,
-.main {
-  width: 90%;
-  margin: 0 auto;
+.header {
   padding: 1rem 0;
+
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header img {
+  width: 90vw;
+  max-width: 550px;
+}
+
+.Filters {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 .inputSearch,
 .inputSelect {
   border: medium solid #01b4c6;
   padding: 0.5rem 1rem;
-  margin: 1rem;
+}
+
+.notFoundMessage {
+  color: white;
+  font-size: 2rem;
 }
 
 .CharacterList {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+
   gap: 2rem;
+
+  width: 80%;
+  margin: 3rem auto;
 }
 
 .CharacterCard {
