@@ -21,6 +21,7 @@ function CharacterCard(props) {
             {iconSpecies(props.eachCharacter.species)}
           </li>
           <li>{iconStatus(props.eachCharacter.status)}</li>
+          <li>{props.eachCharacter.type}</li>
         </ul>
       </article>
     </Link>

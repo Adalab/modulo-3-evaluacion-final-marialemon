@@ -20,6 +20,10 @@ function App() {
   const [filterSpecies, setFilterSpecies] = useState(
     ls.get("filterSpecies", "All")
   );
+  const [filterType, setFilterType] = useState(ls.get("filterType", ""));
+  const [filterStatus, setFilterStatus] = useState(
+    ls.get("filterStatus", "All")
+  );
 
   useEffect(
     () => {
@@ -50,6 +54,14 @@ function App() {
     ls.set("filterSpecies", filterSpecies);
   }, [filterSpecies]);
 
+  useEffect(() => {
+    ls.set("filterType", filterType);
+  }, [filterType]);
+
+  useEffect(() => {
+    ls.set("filterStatus", filterStatus);
+  }, [filterStatus]);
+
   //EV HANDLER
 
   const handleFilter = (data) => {
@@ -57,6 +69,10 @@ function App() {
       setFilterName(data.value);
     } else if (data.key === "species") {
       setFilterSpecies(data.value);
+    } else if (data.key === "type") {
+      setFilterType(data.value);
+    } else if (data.key === "status") {
+      setFilterStatus(data.value);
     }
   };
 
@@ -73,6 +89,18 @@ function App() {
         return true;
       } else {
         return eachCharacter.species === filterSpecies;
+      }
+    })
+    .filter((eachCharacter) => {
+      return eachCharacter.type
+        .toLowerCase()
+        .includes(filterType.toLowerCase());
+    })
+    .filter((eachCharacter) => {
+      if (filterStatus === "All") {
+        return true;
+      } else {
+        return eachCharacter.status === filterStatus;
       }
     });
 
@@ -97,7 +125,9 @@ function App() {
         <img src={logo} alt="Rick and Morty logotipo" title="Rick and Morty" />
         <Filters
           filterName={filterName}
+          filterType={filterType}
           filterSpecies={filterSpecies}
+          filterStatus={filterStatus}
           handleFilter={handleFilter}
         />
       </header>

@@ -15,9 +15,9 @@ function getApiData() {
           status: eachCharacter.status,
           origin: eachCharacter.origin,
           episode: eachCharacter.episode,
+          type: eachCharacter.type,
         };
       });
-
       return filteredData;
     });
 }
